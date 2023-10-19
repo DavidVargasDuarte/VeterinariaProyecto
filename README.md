@@ -22,7 +22,6 @@
 
 <h3>Realizar los siguientes EndPoints de las siguientes consultas:</h3>
 
-- Obtener todos los medicamentos con menos de 50 unidades en stock.
 - Listar los proveedores con su información de contacto en medicamentos.
 - Medicamentos comprados al ‘Proveedor A’.
 - Obtener recetas médicas emitidas después del 1 de enero de 2023.
