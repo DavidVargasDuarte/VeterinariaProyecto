@@ -7,5 +7,5 @@ namespace Dominio.Interfaces;
 
 public interface IPropietarioRepo : IGenericRepo<Propietario>
 {
-        
+    Task<object> GoldenRetriever();
 }

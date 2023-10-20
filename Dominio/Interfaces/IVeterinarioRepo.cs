@@ -7,6 +7,6 @@ namespace Dominio.Interfaces
 {
     public interface IVeterinarioRepo : IGenericRepo<Veterinario>
     {
-        Task<object> CirujanoVascular();
+        Task<IEnumerable<Veterinario>> CirujanoVascular();
     }
 }

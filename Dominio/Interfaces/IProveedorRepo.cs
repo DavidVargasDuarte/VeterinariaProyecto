@@ -7,5 +7,5 @@ namespace Dominio.Interfaces;
 
 public interface IProveedorRepo : IGenericRepo<Proveedores>
 {
-        
+    Task<object> ProveedorMedicamentos();
 }
