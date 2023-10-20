@@ -7,7 +7,7 @@
 <h2>Tecnologias</h2>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"><br> 
+<img src="https://thumbs.dreamstime.com/z/una-bandera-de-la-cl%C3%ADnica-veterinaria-116220245.jpg"><br> 
 
 - **Back-End Development**: 
   ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=flat&logo=c-sharp&logoColor=white) ![.Net](https://img.shields.io/badge/.NET-5C2D91?style=flat&logo=.net&logoColor=white)   
