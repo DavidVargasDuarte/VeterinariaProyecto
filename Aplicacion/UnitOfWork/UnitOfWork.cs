@@ -33,111 +33,111 @@ namespace Aplicacion.UnitOfWork
             context = _context;
         }
 
-        public ICitaRepo Cita
+        public ICitaRepo Citas
         {
             get
             {
                 if (_citas == null)
                 {
                     _citas = new CitaRepo(context);
-    }
+                }
                 return _citas;
             }
         }
-        public IDetalleMovimientoRepo DetalleMovimiento
+        public IDetalleMovimientoRepo DetalleMovimientos
         {
             get
             {
                 if (_DetalleMoviminetos == null)
                 {
-                    _DetalleMoviminetos = new DetalleMovimientoRepo(context);
-    }
+                    _DetalleMoviminetos = new DetalleMoviminetoRepo(context);
+                }
                 return _DetalleMoviminetos;
             }
         }
-        public IEspecieRepo Especie
+        public IEspecieRepo Especies
         {
             get
             {
                 if (_Especies == null)
                 {
                     _Especies = new EspeciesRepo(context);
-    }
+                }
                 return _Especies;
             }
 
         }
-        public ILaboratorioRepo Laboratorio
+        public ILaboratorioRepo Laboratorios
         {
             get
             {
                 if (_Laboratorios == null)
                 {
                     _Laboratorios = new LaboratorioRepo(context);
-    }
+                }
                 return _Laboratorios;
             }
         }
-        public IMascotaRepo Mascota
+        public IMascotaRepo Mascotas
         {
             get
             {
                 if (_Mascotas == null)
                 {
                     _Mascotas = new MascotasRepo(context);
-    }
+                }
                 return _Mascotas;
             }
         }
-        public IMedicamentoRepo Medicamento
+        public IMedicamentoRepo Medicamentos
         {
             get
             {
                 if (_Medicamentos == null)
                 {
                     _Medicamentos = new MedicamentoRepo(context);
-    }
+                }
                 return _Medicamentos;
             }
         }
-        
-        public IMovimientoMedicRepo MovimientoMedic
+
+        public IMovimientoMedicRepo MovimientoMedics
         {
             get
             {
                 if (_MovimientoMedics == null)
                 {
                     _MovimientoMedics = new MovimientoMedicRepo(context);
-    }
+                }
                 return _MovimientoMedics;
             }
         }
 
-        public IPropietarioRepo Propietario
+        public IPropietarioRepo Propietarios
         {
             get
             {
                 if (_Propietarios == null)
                 {
                     _Propietarios = new PropietarioRepo(context);
-    }
+                }
                 return _Propietarios;
             }
         }
 
-        public IProveedorRepo Proveedor
+        public IProveedorRepo Proveedors
         {
             get
             {
                 if (_Proveedores == null)
                 {
                     _Proveedores = new ProveedorRepo(context);
-    }
+                }
                 return _Proveedores;
             }
         }
 
-        public IRazaRepo Raza
+        public IRazaRepo Razas
 
         {
             get
@@ -145,86 +145,80 @@ namespace Aplicacion.UnitOfWork
                 if (_Razas == null)
                 {
                     _Razas = new RazaRepo(context);
-    }
+                }
                 return _Razas;
             }
         }
 
-        public IRolesRepo Roles
+        public IRolesRepo Rols
         {
             get
             {
                 if (_Roles == null)
                 {
                     _Roles = new RolesRepo(context);
-    }
+                }
                 return _Roles;
             }
         }
 
 
-         public ITratamientoMedicRepo TratamientoMedic
+        public ITratamientoMedicRepo TratamientoMedics
         {
             get
             {
                 if (_TratamientoMedicos == null)
                 {
                     _TratamientoMedicos = new TratamientoMedicRepo(context);
-    }
+                }
                 return _TratamientoMedicos;
             }
         }
 
-         public IUsuarioRepo Usuario
+        public IUsuarioRepo Usuarios
         {
             get
             {
                 if (_Usuarios == null)
                 {
                     _Usuarios = new UsuarioRepo(context);
-    }
+                }
                 return _Usuarios;
             }
         }
 
-         public IVeterinarioRepo Veterinario
+        public IVeterinarioRepo Veterinarios
         {
             get
             {
                 if (_Veterinarios == null)
                 {
                     _Veterinarios = new VeterinarioRepo(context);
-    }
+                }
                 return _Veterinarios;
             }
         }
 
-        public ITipoMovimientoRepo TipoMovimiento
+        public ITipoMovimientoRepo TipoMovimientos
         {
             get
             {
                 if (_TipoMovimiento == null)
                 {
                     _TipoMovimiento = new TipoMovimientoRepo(context);
-    }
+                }
                 return _TipoMovimiento;
             }
         }
 
         public void Dispose()
-{
-    context.Dispose();
-}
-public async Task<int> SaveAsync()
-{
-    return await context.SaveChangesAsync();
-}
-    }
-
-    internal class DetalleMovimientoRepo : DetalleMoviminetoRepo
-    {
-        public DetalleMovimientoRepo(VeterinariaContext context) : base(context)
         {
+            context.Dispose();
+        }
+
+        public async Task<int> SaveAsync()
+        {
+            return await context.SaveChangesAsync();
         }
     }
 }
