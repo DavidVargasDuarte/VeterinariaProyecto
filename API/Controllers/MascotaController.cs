@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -30,8 +30,47 @@ public class MascotaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<Mascotas>>> EspecieFelina()
     {
-        var felinos = await unitOfWork.Mascota.EspecieFelina();
+        var felinos = await unitOfWork.Mascotas.EspecieFelina();
         return Ok(felinos);
+    }
+
+    [HttpGet("MascotasVacunadas2023")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<MascotaDto>>> MascotasVacunadas2023()
+    {
+        var mascotasVacunadas = await unitOfWork.Mascotas.MascotasVacunadas2023();
+        return mapper.Map<List<MascotaDto>>(mascotasVacunadas);
+    }
+
+    [HttpGet("MascotaEspecie")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> MascotaEspecie()
+    {
+        var mascota = await unitOfWork.Mascotas.MascotaEspecie();
+        var especie = mapper.Map<IEnumerable<object>>(mascota);
+        return Ok(especie);
+    }
+
+    [HttpGet("MascotaXVeterinario")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> MascotaXVeterinario()
+    {
+        var mascotas = await unitOfWork.Mascotas.MascotaXVeterinario();
+        var vacunadas = mapper.Map<IEnumerable<object>>(mascotas);
+        return Ok(vacunadas);
+    }
+
+    [HttpGet("RazasCantidadMascotas")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> RazasCantidadMascotas()
+    {
+        var mascotasRazas = await unitOfWork.Mascotas.RazasCantidadMascotas();
+        var cantidad = mapper.Map<IEnumerable<object>>(mascotasRazas);
+        return Ok(cantidad);
     }
 
     [HttpGet]
@@ -39,7 +78,7 @@ public class MascotaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<MascotaDto>>> Get()
     {
-        var datos = await unitOfWork.Mascota.GetAllAsync();
+        var datos = await unitOfWork.Mascotas.GetAllAsync();
         return mapper.Map<List<MascotaDto>>(datos);
     }
 
@@ -48,7 +87,7 @@ public class MascotaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<MascotaDto>> Get(int id)
     {
-        var data = await unitOfWork.Mascota.GetByIdAsync(id);
+        var data = await unitOfWork.Mascotas.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -63,7 +102,7 @@ public class MascotaController : BaseApiController
     public async Task<ActionResult<MascotaDto>> Post(MascotaDto mascotaDto)
     {
         var data = this.mapper.Map<Mascotas>(mascotaDto);
-        this.unitOfWork.Mascota.Add(data);
+        this.unitOfWork.Mascotas.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -85,7 +124,7 @@ public class MascotaController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<Mascotas>(mascotaDto);
-        unitOfWork.Mascota.Update(data);
+        unitOfWork.Mascotas.Update(data);
         await unitOfWork.SaveAsync();
         return mascotaDto;
     }
@@ -95,12 +134,12 @@ public class MascotaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.Mascota.GetByIdAsync(id);
+        var data = await unitOfWork.Mascotas.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.Mascota.Remove(data);
+        unitOfWork.Mascotas.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
     }

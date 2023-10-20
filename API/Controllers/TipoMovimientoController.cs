@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -31,7 +31,7 @@ public class TipoMovimientoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<TipoMovimientoDto>>> Get()
     {
-        var datos = await unitOfWork.TipoMovimiento.GetAllAsync();
+        var datos = await unitOfWork.TipoMovimientos.GetAllAsync();
         return mapper.Map<List<TipoMovimientoDto>>(datos);
     }
 
@@ -40,7 +40,7 @@ public class TipoMovimientoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<TipoMovimientoDto>> Get(int id)
     {
-        var data = await unitOfWork.TipoMovimiento.GetByIdAsync(id);
+        var data = await unitOfWork.TipoMovimientos.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -55,7 +55,7 @@ public class TipoMovimientoController : BaseApiController
     public async Task<ActionResult<TipoMovimientoDto>> Post(TipoMovimientoDto tipoMovimientoDto)
     {
         var data = this.mapper.Map<TipoMovimineto>(tipoMovimientoDto);
-        this.unitOfWork.TipoMovimiento.Add(data);
+        this.unitOfWork.TipoMovimientos.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -77,7 +77,7 @@ public class TipoMovimientoController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<TipoMovimineto>(tipoMovimientoDto);
-        unitOfWork.TipoMovimiento.Update(data);
+        unitOfWork.TipoMovimientos.Update(data);
         await unitOfWork.SaveAsync();
         return tipoMovimientoDto;
     }
@@ -87,12 +87,12 @@ public class TipoMovimientoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.TipoMovimiento.GetByIdAsync(id);
+        var data = await unitOfWork.TipoMovimientos.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.TipoMovimiento.Remove(data);
+        unitOfWork.TipoMovimientos.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -17,7 +17,7 @@ namespace API.Controllers;
 
 public class ProveedorController : BaseApiController
 {
-   private readonly IUnitOfwork unitOfWork;
+    private readonly IUnitOfwork unitOfWork;
     private readonly IMapper mapper;
 
     public ProveedorController(IUnitOfwork unitOfWork, IMapper mapper)
@@ -26,13 +26,23 @@ public class ProveedorController : BaseApiController
         this.mapper = mapper;
     }
 
+    [HttpGet("ProveedorMedicamentos")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> ProveedorMedicamentos()
+    {
+        var medicamento = await unitOfWork.Proveedors.ProveedorMedicamentos();
+        var proveedor = mapper.Map<IEnumerable<object>>(medicamento);
+        return Ok(proveedor);
+    }
+
     [HttpGet]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<ProveedorDto>>> Get()
     {
-        var datos = await unitOfWork.Proveedor.GetAllAsync();
+        var datos = await unitOfWork.Proveedors.GetAllAsync();
         return mapper.Map<List<ProveedorDto>>(datos);
     }
 
@@ -41,7 +51,7 @@ public class ProveedorController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<ProveedorDto>> Get(int id)
     {
-        var data = await unitOfWork.Proveedor.GetByIdAsync(id);
+        var data = await unitOfWork.Proveedors.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -56,7 +66,7 @@ public class ProveedorController : BaseApiController
     public async Task<ActionResult<ProveedorDto>> Post(ProveedorDto proveedorDto)
     {
         var data = this.mapper.Map<Proveedores>(proveedorDto);
-        this.unitOfWork.Proveedor.Add(data);
+        this.unitOfWork.Proveedors.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -78,7 +88,7 @@ public class ProveedorController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<Proveedores>(proveedorDto);
-        unitOfWork.Proveedor.Update(data);
+        unitOfWork.Proveedors.Update(data);
         await unitOfWork.SaveAsync();
         return proveedorDto;
     }
@@ -88,13 +98,13 @@ public class ProveedorController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.Proveedor.GetByIdAsync(id);
+        var data = await unitOfWork.Proveedors.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.Proveedor.Remove(data);
+        unitOfWork.Proveedors.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
-    }     
+    }
 }

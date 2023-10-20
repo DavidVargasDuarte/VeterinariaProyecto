@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -32,7 +32,7 @@ public class RolController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<RolesDto>>> Get()
     {
-        var datos = await unitOfWork.Roles.GetAllAsync();
+        var datos = await unitOfWork.Rols.GetAllAsync();
         return mapper.Map<List<RolesDto>>(datos);
     }
 
@@ -41,7 +41,7 @@ public class RolController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<RolesDto>> Get(int id)
     {
-        var data = await unitOfWork.Roles.GetByIdAsync(id);
+        var data = await unitOfWork.Rols.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -56,7 +56,7 @@ public class RolController : BaseApiController
     public async Task<ActionResult<RolesDto>> Post(RolesDto rolesDto)
     {
         var data = this.mapper.Map<Roles>(rolesDto);
-        this.unitOfWork.Roles.Add(data);
+        this.unitOfWork.Rols.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -78,7 +78,7 @@ public class RolController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<Roles>(rolesDto);
-        unitOfWork.Roles.Update(data);
+        unitOfWork.Rols.Update(data);
         await unitOfWork.SaveAsync();
         return rolesDto;
     }
@@ -88,12 +88,12 @@ public class RolController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.Roles.GetByIdAsync(id);
+        var data = await unitOfWork.Rols.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.Roles.Remove(data);
+        unitOfWork.Rols.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
     }   

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Dominio.Interfaces;
 using Dominio;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 
 namespace API.Controllers;
@@ -32,7 +32,7 @@ public class CitaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<CitaDto>>> Get()
     {
-        var datos = await unitOfWork.Cita.GetAllAsync();
+        var datos = await unitOfWork.Citas.GetAllAsync();
         return mapper.Map<List<CitaDto>>(datos);
     }
 
@@ -41,7 +41,7 @@ public class CitaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CitaDto>> Get(int id)
     {
-        var data = await unitOfWork.Cita.GetByIdAsync(id);
+        var data = await unitOfWork.Citas.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -56,7 +56,7 @@ public class CitaController : BaseApiController
     public async Task<ActionResult<CitaDto>> Post(CitaDto citaDto)
     {
         var data = this.mapper.Map<Citas>(citaDto);
-        this.unitOfWork.Cita.Add(data);
+        this.unitOfWork.Citas.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -78,7 +78,7 @@ public class CitaController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<Citas>(citaDto);
-        unitOfWork.Cita.Update(data);
+        unitOfWork.Citas.Update(data);
         await unitOfWork.SaveAsync();
         return citaDto;
     }
@@ -88,12 +88,12 @@ public class CitaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.Cita.GetByIdAsync(id);
+        var data = await unitOfWork.Citas.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.Cita.Remove(data);
+        unitOfWork.Citas.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -31,7 +31,7 @@ public class MovimientoMedicController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<MovimientoMedicDto>>> Get()
     {
-        var datos = await unitOfWork.MovimientoMedic.GetAllAsync();
+        var datos = await unitOfWork.MovimientoMedics.GetAllAsync();
         return mapper.Map<List<MovimientoMedicDto>>(datos);
     }
 
@@ -40,7 +40,7 @@ public class MovimientoMedicController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<MovimientoMedicDto>> Get(int id)
     {
-        var data = await unitOfWork.MovimientoMedic.GetByIdAsync(id);
+        var data = await unitOfWork.MovimientoMedics.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -55,7 +55,7 @@ public class MovimientoMedicController : BaseApiController
     public async Task<ActionResult<MovimientoMedicDto>> Post(MovimientoMedicDto movimientoMedicDto)
     {
         var data = this.mapper.Map<MovimientoMedic>(movimientoMedicDto);
-        this.unitOfWork.MovimientoMedic.Add(data);
+        this.unitOfWork.MovimientoMedics.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -77,7 +77,7 @@ public class MovimientoMedicController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<MovimientoMedic>(movimientoMedicDto);
-        unitOfWork.MovimientoMedic.Update(data);
+        unitOfWork.MovimientoMedics.Update(data);
         await unitOfWork.SaveAsync();
         return movimientoMedicDto;
     }
@@ -87,12 +87,12 @@ public class MovimientoMedicController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.MovimientoMedic.GetByIdAsync(id);
+        var data = await unitOfWork.MovimientoMedics.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.MovimientoMedic.Remove(data);
+        unitOfWork.MovimientoMedics.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
     }   

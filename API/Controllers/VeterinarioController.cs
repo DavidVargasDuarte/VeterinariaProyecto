@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -26,13 +26,22 @@ public class VeterinarioController : BaseApiController
         this.mapper = mapper;
     }
 
+    [HttpGet("CirujanoVascular")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<VeterinarioDto>>> CirujanoVascular()
+    {
+        var cirujanoVascular = await unitOfWork.Veterinarios.CirujanoVascular();
+        return mapper.Map<List<VeterinarioDto>>(cirujanoVascular);
+    }
+
     [HttpGet]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<VeterinarioDto>>> Get()
     {
-        var datos = await unitOfWork.Cita.GetAllAsync();
+        var datos = await unitOfWork.Veterinarios.GetAllAsync();
         return mapper.Map<List<VeterinarioDto>>(datos);
     }
 
@@ -41,7 +50,7 @@ public class VeterinarioController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<VeterinarioDto>> Get(int id)
     {
-        var data = await unitOfWork.Cita.GetByIdAsync(id);
+        var data = await unitOfWork.Veterinarios.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -56,7 +65,7 @@ public class VeterinarioController : BaseApiController
     public async Task<ActionResult<VeterinarioDto>> Post(VeterinarioDto veterinarioDto)
     {
         var data = this.mapper.Map<Veterinario>(veterinarioDto);
-        this.unitOfWork.Veterinario.Add(data);
+        this.unitOfWork.Veterinarios.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -78,7 +87,7 @@ public class VeterinarioController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<Veterinario>(veterinarioDto);
-        unitOfWork.Veterinario.Update(data);
+        unitOfWork.Veterinarios.Update(data);
         await unitOfWork.SaveAsync();
         return veterinarioDto;
     }
@@ -88,12 +97,12 @@ public class VeterinarioController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.Veterinario.GetByIdAsync(id);
+        var data = await unitOfWork.Veterinarios.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.Veterinario.Remove(data);
+        unitOfWork.Veterinarios.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -32,7 +32,7 @@ public class DetalleMovimientoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<DetallemovimientoDto>>> Get()
     {
-        var datos = await unitOfWork.DetalleMovimiento.GetAllAsync();
+        var datos = await unitOfWork.DetalleMovimientos.GetAllAsync();
         return mapper.Map<List<DetallemovimientoDto>>(datos);
     }
 
@@ -41,7 +41,7 @@ public class DetalleMovimientoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<DetallemovimientoDto>> Get(int id)
     {
-        var data = await unitOfWork.DetalleMovimiento.GetByIdAsync(id);
+        var data = await unitOfWork.DetalleMovimientos.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -56,7 +56,7 @@ public class DetalleMovimientoController : BaseApiController
     public async Task<ActionResult<DetallemovimientoDto>> Post(DetallemovimientoDto detallemovimientoDto)
     {
         var data = this.mapper.Map<DetalleMovimiento>(detallemovimientoDto);
-        this.unitOfWork.DetalleMovimiento.Add(data);
+        this.unitOfWork.DetalleMovimientos.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -78,7 +78,7 @@ public class DetalleMovimientoController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<DetalleMovimiento>(detallemovimientoDto);
-        unitOfWork.DetalleMovimiento.Update(data);
+        unitOfWork.DetalleMovimientos.Update(data);
         await unitOfWork.SaveAsync();
         return detallemovimientoDto;
     }
@@ -88,12 +88,12 @@ public class DetalleMovimientoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.DetalleMovimiento.GetByIdAsync(id);
+        var data = await unitOfWork.DetalleMovimientos.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.DetalleMovimiento.Remove(data);
+        unitOfWork.DetalleMovimientos.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
     }

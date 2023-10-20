@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -32,7 +32,7 @@ public class EspecieController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<EspecieDto>>> Get()
     {
-        var datos = await unitOfWork.Especie.GetAllAsync();
+        var datos = await unitOfWork.Especies.GetAllAsync();
         return mapper.Map<List<EspecieDto>>(datos);
     }
 
@@ -41,7 +41,7 @@ public class EspecieController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<EspecieDto>> Get(int id)
     {
-        var data = await unitOfWork.Especie.GetByIdAsync(id);
+        var data = await unitOfWork.Especies.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -56,7 +56,7 @@ public class EspecieController : BaseApiController
     public async Task<ActionResult<EspecieDto>> Post(EspecieDto especieDto)
     {
         var data = this.mapper.Map<Especies>(especieDto);
-        this.unitOfWork.Especie.Add(data);
+        this.unitOfWork.Especies.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -78,7 +78,7 @@ public class EspecieController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<Especies>(especieDto);
-        unitOfWork.Especie.Update(data);
+        unitOfWork.Especies.Update(data);
         await unitOfWork.SaveAsync();
         return especieDto;
     }
@@ -88,12 +88,12 @@ public class EspecieController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.Especie.GetByIdAsync(id);
+        var data = await unitOfWork.Especies.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.Especie.Remove(data);
+        unitOfWork.Especies.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
     }    

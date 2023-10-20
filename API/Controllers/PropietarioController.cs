@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -26,13 +26,23 @@ public class PropietarioController : BaseApiController
         this.mapper = mapper;
     }
 
+    [HttpGet("GoldenRetriever")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> GoldenRetriever()
+    {
+        var mascotas = await unitOfWork.Propietarios.GoldenRetriever();
+        var golderRetriever = mapper.Map<IEnumerable<object>>(mascotas);
+        return Ok(golderRetriever);
+    }
+
     [HttpGet]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<PropietarioDto>>> Get()
     {
-        var datos = await unitOfWork.Propietario.GetAllAsync();
+        var datos = await unitOfWork.Propietarios.GetAllAsync();
         return mapper.Map<List<PropietarioDto>>(datos);
     }
 
@@ -41,7 +51,7 @@ public class PropietarioController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<PropietarioDto>> Get(int id)
     {
-        var data = await unitOfWork.Propietario.GetByIdAsync(id);
+        var data = await unitOfWork.Propietarios.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -56,7 +66,7 @@ public class PropietarioController : BaseApiController
     public async Task<ActionResult<PropietarioDto>> Post(PropietarioDto propietarioDto)
     {
         var data = this.mapper.Map<Propietario>(propietarioDto);
-        this.unitOfWork.Propietario.Add(data);
+        this.unitOfWork.Propietarios.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -78,7 +88,7 @@ public class PropietarioController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<Propietario>(propietarioDto);
-        unitOfWork.Propietario.Update(data);
+        unitOfWork.Propietarios.Update(data);
         await unitOfWork.SaveAsync();
         return propietarioDto;
     }
@@ -88,12 +98,12 @@ public class PropietarioController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.Propietario.GetByIdAsync(id);
+        var data = await unitOfWork.Propietarios.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.Propietario.Remove(data);
+        unitOfWork.Propietarios.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
     }     

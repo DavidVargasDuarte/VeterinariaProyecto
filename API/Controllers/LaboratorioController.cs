@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -32,7 +32,7 @@ public class LaboratorioController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<LaboratorioDto>>> Get()
     {
-        var datos = await unitOfWork.Laboratorio.GetAllAsync();
+        var datos = await unitOfWork.Laboratorios.GetAllAsync();
         return mapper.Map<List<LaboratorioDto>>(datos);
     }
 
@@ -41,7 +41,7 @@ public class LaboratorioController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<LaboratorioDto>> Get(int id)
     {
-        var data = await unitOfWork.Laboratorio.GetByIdAsync(id);
+        var data = await unitOfWork.Laboratorios.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -56,7 +56,7 @@ public class LaboratorioController : BaseApiController
     public async Task<ActionResult<LaboratorioDto>> Post(LaboratorioDto laboratorioDto)
     {
         var data = this.mapper.Map<Laboratorios>(laboratorioDto);
-        this.unitOfWork.Laboratorio.Add(data);
+        this.unitOfWork.Laboratorios.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -78,7 +78,7 @@ public class LaboratorioController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<Laboratorios>(laboratorioDto);
-        unitOfWork.Laboratorio.Update(data);
+        unitOfWork.Laboratorios.Update(data);
         await unitOfWork.SaveAsync();
         return laboratorioDto;
     }
@@ -88,12 +88,12 @@ public class LaboratorioController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.Laboratorio.GetByIdAsync(id);
+        var data = await unitOfWork.Laboratorios.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.Laboratorio.Remove(data);
+        unitOfWork.Laboratorios.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
     }     

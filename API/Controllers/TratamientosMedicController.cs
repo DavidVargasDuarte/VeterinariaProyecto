@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -31,7 +31,7 @@ public class TratamientosMedicController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<TratamientoMedicoDto>>> Get()
     {
-        var datos = await unitOfWork.TratamientoMedic.GetAllAsync();
+        var datos = await unitOfWork.TratamientoMedics.GetAllAsync();
         return mapper.Map<List<TratamientoMedicoDto>>(datos);
     }
 
@@ -40,7 +40,7 @@ public class TratamientosMedicController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<TratamientoMedicoDto>> Get(int id)
     {
-        var data = await unitOfWork.TratamientoMedic.GetByIdAsync(id);
+        var data = await unitOfWork.TratamientoMedics.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -55,7 +55,7 @@ public class TratamientosMedicController : BaseApiController
     public async Task<ActionResult<TratamientoMedicoDto>> Post(TratamientoMedicoDto tratamientoMedicoDto)
     {
         var data= this.mapper.Map<TratamientosMedicos>(tratamientoMedicoDto);
-        this.unitOfWork.TratamientoMedic.Add(data);
+        this.unitOfWork.TratamientoMedics.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -77,7 +77,7 @@ public class TratamientosMedicController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<TratamientosMedicos>(tratamientoMedicoDto);
-        unitOfWork.TratamientoMedic.Update(data);
+        unitOfWork.TratamientoMedics.Update(data);
         await unitOfWork.SaveAsync();
         return tratamientoMedicoDto;
     }
@@ -86,12 +86,12 @@ public class TratamientosMedicController : BaseApiController
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id){
-       var data = await unitOfWork.TratamientoMedic.GetByIdAsync(id);
+       var data = await unitOfWork.TratamientoMedics.GetByIdAsync(id);
        if(data == null)
        {
           return NotFound();
        }
-       unitOfWork.TratamientoMedic.Remove(data);
+       unitOfWork.TratamientoMedics.Remove(data);
        await unitOfWork.SaveAsync();
        return NoContent();
     }

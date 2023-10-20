@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Dto;
+using API.Dtos;
 using AutoMapper;
 using Dominio;
 using Dominio.Interfaces;
@@ -31,7 +31,7 @@ public class RazaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<RazaDto>>> Get()
     {
-        var datos = await unitOfWork.Raza.GetAllAsync();
+        var datos = await unitOfWork.Razas.GetAllAsync();
         return mapper.Map<List<RazaDto>>(datos);
     }
 
@@ -40,7 +40,7 @@ public class RazaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<RazaDto>> Get(int id)
     {
-        var data = await unitOfWork.Raza.GetByIdAsync(id);
+        var data = await unitOfWork.Razas.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
@@ -55,7 +55,7 @@ public class RazaController : BaseApiController
     public async Task<ActionResult<RazaDto>> Post(RazaDto razaDto)
     {
         var data = this.mapper.Map<Razas>(razaDto);
-        this.unitOfWork.Raza.Add(data);
+        this.unitOfWork.Razas.Add(data);
         await unitOfWork.SaveAsync();
         if (data == null)
         {
@@ -77,7 +77,7 @@ public class RazaController : BaseApiController
             return NotFound();
         }
         var data = this.mapper.Map<Razas>(razaDto);
-        unitOfWork.Raza.Update(data);
+        unitOfWork.Razas.Update(data);
         await unitOfWork.SaveAsync();
         return razaDto;
     }
@@ -87,12 +87,12 @@ public class RazaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
-        var data = await unitOfWork.Raza.GetByIdAsync(id);
+        var data = await unitOfWork.Razas.GetByIdAsync(id);
         if (data == null)
         {
             return NotFound();
         }
-        unitOfWork.Raza.Remove(data);
+        unitOfWork.Razas.Remove(data);
         await unitOfWork.SaveAsync();
         return NoContent();
     }    
