@@ -20,41 +20,21 @@
 </p>
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"><br>
 
-<h3>Realizar los siguientes EndPoints de las siguientes consultas:</h3>
+<h3>EndPoints de las siguientes consultas Realizadas:</h3>
 
-- Listar los proveedores con su información de contacto en medicamentos.
-- Medicamentos comprados al ‘Proveedor A’.
-- Obtener recetas médicas emitidas después del 1 de enero de 2023.
-- Total de ventas del medicamento ‘Paracetamol’.
-- Medicamentos que caducan antes del 1 de enero de 2024.
-- Total de medicamentos vendidos por cada proveedor.
-- Cantidad total de dinero recaudado por las ventas de medicamentos.
-- Medicamentos que no han sido vendidos.
-- Obtener el medicamento más caro.
-- Número de medicamentos por proveedor.
-- Pacientes que han comprado Paracetamol.
-- Proveedores que no han vendido medicamentos en el último año.
-- Obtener el total de medicamentos vendidos en marzo de 2023.
-- Obtener el medicamento menos vendido en 2023.
-- Ganancia total por proveedor en 2023 (asumiendo un campo precioCompra en Compras).
-- Promedio de medicamentos comprados por venta.
-- Cantidad de ventas realizadas por cada empleado en 2023.
-- Obtener todos los medicamentos que expiren en 2024.
-- Empleados que hayan hecho más de 5 ventas en total.
-- Medicamentos que no han sido vendidos nunca.
-- Paciente que ha gastado más dinero en 2023.
-- Empleados que no han realizado ninguna venta en 2023.
-- Proveedor que ha suministrado más medicamentos en 2023.
-- Pacientes que compraron el medicamento “Paracetamol” en 2023.
-- Total de medicamentos vendidos por mes en 2023.
-- Empleados con menos de 5 ventas en 2023.
-- Número total de proveedores que suministraron medicamentos en 2023.
-- Proveedores de los medicamentos con menos de 50 unidades en stock.
-- Pacientes que no han comprado ningún medicamento en 2023.
-- Medicamentos que han sido vendidos cada mes del año 2023.
-- Empleado que ha vendido la mayor cantidad de medicamentos distintos en 2023.
-- Total gastado por cada paciente en 2023.
-- Medicamentos que no han sido vendidos en 2023.
-- Proveedores que han suministrado al menos 5 medicamentos diferentes en 2023.
-- Total de medicamentos vendidos en el primer trimestre de 2023.
-- Empleados que no realizaron ventas en abril de 2023.
+- Crear un consulta que permita visualizar los veterinarios cuya especialidad sea Cirujano vascular.
+- Mostrar las mascotas que se encuentren registradas cuya especie sea felina.
+- Listar los medicamentos que pertenezcan a el laboratorio Genfar
+<h3>EndPoints de las siguientes consultas no Realizadas:</h3>
+
+- Listar los propietarios y sus mascotas.
+- Listar los medicamentos que tenga un precio de venta mayor a 50000
+- Listar las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023
+- Listar todas las mascotas agrupadas por especie.
+- Listar todos los movimientos de medicamentos y el valor total de cada movimiento.
+- Listar las mascotas que fueron atendidas por un determinado veterinario.
+- Listar los proveedores que me venden un determinado medicamento.
+- Listar las mascotas y sus propietarios cuya raza sea Golden Retriver
+- Listar la cantidad de mascotas que pertenecen a una raza a una raza. Nota: Se debe mostrar una lista de las razas y la cantidad de mascotas que pertenecen a la raza.
+
+
