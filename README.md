@@ -1,4 +1,4 @@
-<img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=6000" alt="Imagen Farmacia" width="auto" height="auto">
+<img src="https://thumbs.dreamstime.com/z/una-bandera-de-la-cl%C3%ADnica-veterinaria-116220245.jpg" alt="Imagen Farmacia" width="auto" height="auto">
 <h1 align="center"><img width="26" height="26" src="https://img.icons8.com/doodle/36/pills.png" alt="pills"/><b>Veterinaria</b></h1>
 <br>
 <p>El sistema contará con diferentes módulos que abarcarán áreas clave como el registro de pacientes, la programación de citas, el seguimiento de tratamientos médicos, la gestión de inventario de medicamentos y productos, así como la generación de reportes y estadísticas relevantes para la toma de decisiones.</p>
@@ -7,7 +7,7 @@
 <h2>Tecnologias</h2>
 
 <p align="center">
-<img src="https://thumbs.dreamstime.com/z/una-bandera-de-la-cl%C3%ADnica-veterinaria-116220245.jpg"><br> 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"><br> 
 
 - **Back-End Development**: 
   ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=flat&logo=c-sharp&logoColor=white) ![.Net](https://img.shields.io/badge/.NET-5C2D91?style=flat&logo=.net&logoColor=white)   
