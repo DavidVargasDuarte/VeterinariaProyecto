@@ -25,16 +25,18 @@
 - Crear un consulta que permita visualizar los veterinarios cuya especialidad sea Cirujano vascular.
 - Mostrar las mascotas que se encuentren registradas cuya especie sea felina.
 - Listar los medicamentos que pertenezcan a el laboratorio Genfar
-<h3>EndPoints de las siguientes consultas no Realizadas:</h3>
-
-- Listar los propietarios y sus mascotas.
 - Listar los medicamentos que tenga un precio de venta mayor a 50000
 - Listar las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023
 - Listar todas las mascotas agrupadas por especie.
-- Listar todos los movimientos de medicamentos y el valor total de cada movimiento.
 - Listar las mascotas que fueron atendidas por un determinado veterinario.
 - Listar los proveedores que me venden un determinado medicamento.
 - Listar las mascotas y sus propietarios cuya raza sea Golden Retriver
 - Listar la cantidad de mascotas que pertenecen a una raza a una raza. Nota: Se debe mostrar una lista de las razas y la cantidad de mascotas que pertenecen a la raza.
+
+
+<h3>EndPoints de las siguientes consultas no Realizadas:</h3>
+
+- Listar los propietarios y sus mascotas.
+- Listar todos los movimientos de medicamentos y el valor total de cada movimiento.
 
 
