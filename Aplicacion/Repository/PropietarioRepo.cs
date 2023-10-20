@@ -33,8 +33,27 @@ public class PropietarioRepo : GenericRepo<Propietario>, IPropietarioRepo
         .FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public static implicit operator PropietarioRepo(ProveedorRepo v)
+    public async Task<object> GoldenRetriever()
     {
-        throw new NotImplementedException();
+        var consulta = from p in _context.Propietarios
+                       select new
+                       {
+                           nombre = p.Nombre,
+                           email = p.Correo,
+                           telefono = p.Telefono,
+                           mascotas = (from m in _context.Mascots
+                                       join r in _context.Razas on m.IdRazaFK equals r.Id
+                                       where r.Nombre == "Golden Retriver"
+                                       where m.IdPropietarioFK == p.Id
+                                       select new
+                                       {
+                                           Nombre = m.Nombre,
+                                           FechaNacimiento = m.FechaNacimiento,
+                                           Raza = r.Nombre
+                                       }).ToList()
+                       };
+
+        var goldenRetriever = await consulta.ToListAsync();
+        return goldenRetriever;
     }
 }

@@ -18,7 +18,7 @@ public class VeterinarioRepo : GenericRepo<Veterinario>, IVeterinarioRepo
         _context = context;
     }
 
-    public async Task<object> CirujanoVascular()
+    public async Task<IEnumerable<Veterinario>> CirujanoVascular()
     {
         return await _context.Veterinarios
             .Where(p =>p.Especialidad == "Cirujano Vascular")

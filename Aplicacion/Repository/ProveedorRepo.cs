@@ -33,5 +33,25 @@ public class ProveedorRepo : GenericRepo<Proveedores>, IProveedorRepo
             .Include(p => p.Medicamentos)
             .Include(p => p.MedicamentoProveedors)
         .FirstOrDefaultAsync(p => p.Id == id);
-    } 
+    }
+
+    public async Task<object> ProveedorMedicamentos()
+    {
+        var proveedorMedicamento = from m in _context.Medicamentos
+                                   select new
+                                   {
+                                       nombre = m.Nombre,
+                                       proveedores = (from mp in _context.MedicamentoProveedors
+                                                      join me in _context.Medicamentos on mp.IdMedicamnetoFK equals me.Id
+                                                      join p in _context.Proveedors on mp.IdProveedorFK equals p.Id
+                                                      where m.Id == mp.IdMedicamnetoFK
+                                                      select new
+                                                      {
+                                                          nombre = p.Nombre,
+                                                      }).ToList()
+                                   };
+
+        var medicamentoxProveedor = await proveedorMedicamento.ToListAsync();
+        return medicamentoxProveedor;
+    }
 }
